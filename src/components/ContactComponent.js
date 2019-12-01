@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Label,  Col, Row } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
+import { Control, Form, Errors, actions } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) =>  (val) && (val.length >= len);
+const minLength = (len) => (val) => (val) && (val.length >= len);
 //https://stackoverflow.com/questions/4338267/validate-phone-number-with-javascript/4338544  answer # 2 by user EeeeeK
 // const isNumber = (val) => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(val);
 const isNumber = (val) => /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(val);
@@ -25,9 +25,10 @@ class Contact extends Component {
     handleSubmit(values) {
         console.log("Current State is: " + JSON.stringify(values));
         alert("Current State is: " + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
-    
+
     render() {
         return (
             <div className="container">
@@ -75,7 +76,7 @@ class Contact extends Component {
                     <div className="col-12">
                         <h3>Send us Your Feedback</h3>
                         <div className="col-12 col-md-9">
-                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
                                 <Row className="form-group">
                                     <Label htmlFor="firstname" md={2}>First Name</Label>
                                     <Col md={10}>
@@ -168,7 +169,7 @@ class Contact extends Component {
                                             id="email"
                                             name="email"
                                             placeholder="Email"
-                                             validators={{
+                                            validators={{
                                                 required
                                                 , validEmail
                                             }}
@@ -223,12 +224,12 @@ class Contact extends Component {
                                 </Row>
                                 <Row className="form-group">
                                     <Col md={{ size: 10, offset: 2 }}>
-                                        <Button type="submit" color="primary">
-                                            Send Feedback
+                                        <Button type="submit" color="primary"> 
+                                            Send Feedback 
                                         </Button>
                                     </Col>
                                 </Row>
-                            </LocalForm>
+                            </Form>
                         </div>
                     </div>
                 </div>
