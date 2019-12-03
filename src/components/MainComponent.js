@@ -67,7 +67,7 @@ class Main extends Component {
 		return (
 			<div>
 				<Header />
-				<TransitionGroup>
+				<TransitionGroup>y
 					<CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
 						<Switch>
 							<Route path='/home' component={HomePage} />
